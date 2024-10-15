@@ -1,6 +1,7 @@
 # TODO: 'snapcraft register <name>'
 name: protonvpn
 icon: snap/gui/protonvpn.svg
+title: Proton VPN
 # TODO: Update summary and description 
 summary: Single-line elevator pitch for your amazing snap
 version: 4.4.2
@@ -26,9 +27,9 @@ platforms:
 
 # TODO: Create app
 #apps:
-#  proton-vpn:
-#    command: usr/bin/proton-vpn
-#    desktop: snap/gui/proton-vpn.desktop
+#  protonvpn:
+#    command: usr/bin/protonvpn
+#    desktop: snap/gui/protonvpn.desktop
 #    extensions:
 #      - gnome
 #    plugs:
@@ -41,12 +42,56 @@ platforms:
 #      - network-bind
 
 parts:
+  python-proton-core:
+    plugin: python
+    source-type: git
+    source: https://github.com/ProtonVPN/python-proton-core.git
+
+  python-proton-keyring-linux:
+    plugin: python
+    source-type: git
+    source: https://github.com/ProtonVPN/python-proton-keyring-linux.git
+    after:
+      - python-proton-core
+
+  python-proton-vpn-local-agent:
+    plugin: python
+    source-type: git
+    source: https://github.com/ProtonVPN/python-proton-vpn-local-agent.git
+    source-submodules: []
+    after:
+      - python-proton-core
+      - python-proton-keyring-linux
+
+  python-proton-vpn-api-core:
+    plugin: python
+    source-type: git
+    source: https://github.com/ProtonVPN/python-proton-vpn-api-core.git
+    source-submodules: []
+    after:
+      - python-proton-core
+      - python-proton-keyring-linux
+      - python-proton-vpn-local-agent
+
+  python-proton-vpn-network-manager:
+    plugin: python
+    source-type: git
+    source: https://github.com/ProtonVPN/python-proton-vpn-network-manager.git
+    after:
+      - python-proton-core
+      - python-proton-keyring-linux
+      - python-proton-vpn-local-agent
+      - python-proton-vpn-api-core
+
   protonvpn:
     plugin: python
     source-type: git
-    source: https://github.com/ProtonVPN/proton-vpn-gtk-app
+    source: https://github.com/ProtonVPN/proton-vpn-gtk-app.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
     source-submodules: []
-    override-build: |
-      pip config set global.index-url https://gitlab.protontech.ch/api/v4/groups/777/-/packages/pypi/simple
-      craftctl default
+    after:
+      - python-proton-core
+      - python-proton-keyring-linux
+      - python-proton-vpn-local-agent
+      - python-proton-vpn-api-core
+      - python-proton-vpn-network-manager

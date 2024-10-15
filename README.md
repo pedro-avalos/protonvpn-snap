@@ -1,8 +1,8 @@
 <h1 align="center">
-  <img src="snap/gui/protonvpn-logo.svg" width="50%" alt="ProtonVPN">
+  <img src="snap/gui/protonvpn-logo.svg" width="50%" alt="Proton VPN">
 </h1>
 
-<p align="center"><b>This is the snap for <a href="https://protonvpn.com">ProtonVPN</a></b>,
+<p align="center"><b>This is the snap for <a href="https://protonvpn.com">Proton VPN</a></b>,
 <i>“Single-line elevator pitch for your amazing snap”</i>.
 It works on Ubuntu, Fedora, Debian, and other major Linux distributions.</p>
 
