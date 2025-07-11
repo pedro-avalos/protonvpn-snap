@@ -2,6 +2,9 @@
   <img src="snap/gui/protonvpn-logo.svg" width="50%" alt="Proton VPN">
 </h1>
 
+> [!NOTE]
+> This repository is a work in progress and the `snapcraft.yaml` is not currently in a working state.
+
 <p align="center"><b>This is the snap for <a href="https://protonvpn.com">Proton VPN</a></b>,
 <i>“Secures your internet and protects your online privacy”</i>.
 It works on Ubuntu, Fedora, Debian, and other major Linux distributions.</p>
